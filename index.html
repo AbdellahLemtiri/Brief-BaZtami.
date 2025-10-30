@@ -13,98 +13,118 @@
       </style>
 </head>
 
-<body>
-
-      <nav class="navbar bg-body-tertiary ">
-            <div class="container-fluid   ">
-                  <a class="navbar-brand  d-flex  justify-content-around align-items-center  w-25" href="index.html">
-                        <img src="image_11zon.webp" alt="Logo de le site web BaZtami" width="80" height="80"
-                              class="d-inline-block align-text-top">
-                        <h1> BaZtami </h1>
-                  </a>
-            </div>
-      </nav>
+<body class="bg-info  bg-opacity-25">
+      <header class="mb-4">
+            <nav class="navbar bg-info text-dark bg-opacity-10">
+                  <div class="container-fluid">
+                        <a class="navbar-brand  d-flex  justify-content-around align-items-center  w-25"
+                              href="index.html">
+                              <img src="image_11zon.webp" alt="Logo de le site web BaZtami" width="80" height="80"
+                                    class="d-inline-block align-text-top">
+                              <h1> Baztami <h3>Manage Your Budget , Grow Your wealth</h3>
+                              </h1>
+                        </a>
+                  </div>
+            </nav>
+      </header>
       <!-- card -->
 
 
 
 
-      <div class="container-sm">
-            <div class="row">
-                  <div class="col">
-                        <div class="card border-danger mb-3">
-                              <h2 class=" d-flex justify-content-center fs-5 m-2"> Dépenses</h2>
 
-                              <div class="card-body text-danger">
-                                    <h5 class="card-title d-flex justify-content-center">0 <span>
-                                                    dh</span></h5>
+
+      <div class="container-sm ">
+            <section>
+                  <div class="row">
+                        <div class="col">
+                              <div class="card border-danger mb-3">
+                                    <h2 class=" d-flex justify-content-center fs-5 m-2"> Dépenses</h2>
+
+                                    <div class="card-body text-danger">
+                                          <h5 id="depenses" class="card-title d-flex justify-content-center">0 <span>
+                                                      dh</span></h5>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="col">
+                              <div class="card border-primary mb-3">
+                                    <h2 class=" d-flex justify-content-center fs-5 m-2"> Solde </h2>
+
+                                    <div class="card-body text-primary">
+                                          <h5 id="solde" class="card-title d-flex justify-content-center">0 <span>
+                                                      dh</span>
+                                          </h5>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="col">
+                              <div class="card border-success mb-3">
+                                    <h2 class=" d-flex justify-content-center fs-5 m-2">Revenus</h2>
+
+                                    <div class="card-body text-success">
+                                          <h5 id="revenus" class="card-title d-flex justify-content-center">0dh</h5>
+                                    </div>
+
+                              </div>
+
+                        </div>
+
+                        <div class="col">
+                              <div class="text-center my-4">
+                                    <button id="ajouterBtn" type="button" class="btn btn-success rounded-5"
+                                          style="width: 50px; height: 40px;">
+                                          <i class="bi bi-plus-circle "></i>
+                                    </button>
                               </div>
                         </div>
                   </div>
-                  <div class="col">
-                        <div class="card border-primary mb-3">
-                              <h2 class=" d-flex justify-content-center fs-5 m-2"> Solde </h2>
-
-                              <div class="card-body text-primary">
-                                    <h5 class="card-title d-flex justify-content-center">0 <span> dh</span>
-                                    </h5>
-                              </div>
-                        </div>
-                  </div>
-                  <div class="col">
-                        <div class="card border-success mb-3">
-                              <h2 class=" d-flex justify-content-center fs-5 m-2">Revenus</h2>
-
-                              <div class="card-body text-success">
-                                    <h5 class="card-title d-flex justify-content-center">0 <span>
-                                                dh</span></h5>
-                              </div>
-                        </div>
-                  </div>
-            </div>
+            </section>
 
 
-            <div class="text-center my-4">
-                  <button id="ajouterBtn" type="button" class="btn btn-success rounded-5" data-bs-toggle="modal"
-                        data-bs-target="#formModal" style="width: 50px; height: 40px;">
-                        <i class="bi bi-plus-circle "></i>
-                  </button>
-            </div>
-            <div class="card border-success mb-3 p-3 mb-2 bg-light text-black d-none" id="formulaire">
+            <div id="formulaire"
+                  class="position-fixed top-50 start-50 translate-middle bg-light border border-success rounded-4 p-4 shadow d-none"
+                  style="z-index: 1050; width: 400px;">
+
                   <div class="card-header bg-transparent border-success fs-5 d-flex  justify-content-between  ">
                         <div class=""> Ajouter Transaction</div>
 
-                        <button id="btnclose" type="button" class="btn-close btn-close-black" aria-label="Close"></button>
+                        <button id="btnclose" type="button" class="btn-close btn-close-black"
+                              aria-label="Close"></button>
 
                   </div>
 
                   <div class="card-body text-success">
                         <div class="input-group mb-3">
                               <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
-                              <input type="text" class="form-control" aria-label="Sizing example input"
+                              <input id="desc" type="text" class="form-control" aria-label="Sizing example input"
                                     aria-describedby="inputGroup-sizing-default">
                         </div>
                         <div class="input-group mb-3">
                               <span class="input-group-text"> Montant </span>
-                              <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                              <input type="number" id="montants" class="form-control"
+                                    aria-label="Amount (to the nearest DH)">
                               <span class="input-group-text">dh</span>
                         </div>
                         <div class="input-group mb-3">
                               <span class="input-group-text">Type</span>
-                              <select class="form-select" aria-label="Default select example">
+                              <select id="type" class="form-select" aria-label="Default select example">
                                     <option value="Revenu">Revenu</option>
                                     <option value="Depense">Deponse</option>
 
                               </select>
 
                         </div>
+                        <div id="message" class=" text-danger">
+
+                        </div>
                         <div class=" d-flex justify-content-center ">
-                              <button id="Ajouter" type="button" class="btn btn-primary">Ajouter</button>
+                              <button id="ajouter" type="button" class="btn btn-primary">Ajouter</button>
                         </div>
                   </div>
 
             </div>
-
+            <div id="les_cards"> </div>
       </div>
 
       <script src="script.js"></script>
