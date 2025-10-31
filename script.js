@@ -33,7 +33,7 @@ function afficher() {
         let newcard = document.createElement('div');
         newcard.classList.add('col-6');
       newcard.innerHTML =
-    '<div class="card shadow-sm ' + color + ' mx-auto my-3" style="width: 22rem;">' +
+    '<div class="card shadow-sm ' + color + ' mx-auto " style="max-width: 29rem;">' +
         '<div class="card-body d-flex justify-content-between align-items-center">' +
             '<div>' +
                 '<h5 class="card-title">Type : ' + t.type + '</h5>' +
@@ -41,10 +41,10 @@ function afficher() {
                 '<p class="fw-bold">Montant ' + t.type + ' est : ' + t.montant + ' DH</p>' +
             '</div>' +
             '<div class="d-flex align-items-end">' +
-                '<button class="btn btn-sm btn-outline-light btn-modif me-2" id="' + i + '">' +
+                '<button class="btn btn-sm btn-outline-light btnmodif me-2" id="' + i + '">' +
                     '<i class="bi bi-pencil-square"></i>' +
                 '</button>' +
-                '<button class="btn btn-sm btn-outline-light btn-supp" id="' + i + '">' +
+                '<button class="btn btn-sm btn-outline-light btnsupp" id="' + i + '">' +
                     '<i class="bi bi-trash"></i>' +
                 '</button>' +
             '</div>' +
@@ -55,7 +55,7 @@ function afficher() {
         cards.appendChild(newcard);
 
         if (t.type === "Revenu") {
-            sommerv = sommerv +t.montant;
+            sommerv = sommerv + t.montant;
         } else {
             sommedep = sommedep+ t.montant;
         }
@@ -94,6 +94,11 @@ function afficher() {
     afficher();
 }
 
+
+
+
+
+
 function supprimercrd(id) {
     tab.splice(id, 1);
     localStorage.setItem('tab', JSON.stringify(tab));
@@ -129,12 +134,14 @@ btnclose.addEventListener('click', function () {
 
 ajouter.addEventListener('click', ajoutecrt);
 
+
 cards.addEventListener('click', function (e) {
-    if (e.target.closest('.btn-supp')) {
-        let id = e.target.closest('.btn-supp').getAttribute('id');
+    if (e.target.closest('.btnsupp')) {
+        let id = e.target.closest('.btnsupp').getAttribute('id');
+       
         supprimercrd(id);
-    } else if (e.target.closest('.btn-modif')) {
-        let id = e.target.closest('.btn-modif').getAttribute('id');
+    } else if (e.target.closest('.btnmodif')) {
+        let id = e.target.closest('.btnmodif').getAttribute('id');
         modifiecrd(id);
     }
 });
