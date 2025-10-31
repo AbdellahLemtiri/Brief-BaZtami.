@@ -1,21 +1,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 let btnajouter = document.getElementById('ajouterBtn');
 let formulaire = document.getElementById('formulaire');
 let btnclose = document.getElementById('btnclose');
@@ -39,28 +24,33 @@ function afficher() {
         let color ;
         
         if(t.type === "Revenu"){
-            color =  "bg-success text-light p-0";
+            color =  "bg-success text-light ";
         }
         else{
-            color = "bg-danger text-light bg-opacity-75"; 
+            color = "bg-danger text-light bg-opacity-75 "; 
         }
 
         let newcard = document.createElement('div');
         newcard.classList.add('col-6');
-        newcard.innerHTML =
-            '<div class="card shadow-sm ' + color + '">' +
-            '<div class="card-body d-flex justify-content-between align-items-center">' +
+      newcard.innerHTML =
+    '<div class="card shadow-sm ' + color + ' mx-auto my-3" style="width: 22rem;">' +
+        '<div class="card-body d-flex justify-content-between align-items-center">' +
             '<div>' +
-            '<h5 class="card-title"> Taype :' + t.type + '</h5>' +
-            '<p class="card-text"> Description' + t.desc + '</p>' +
-            '<p class="fw-bold"> Montant ' + t.montant + ' DH</p>' +
+                '<h5 class="card-title">Type : ' + t.type + '</h5>' +
+                '<p class="card-text">Description : ' + t.desc + '</p>' +
+                '<p class="fw-bold">Montant ' + t.type + ' est : ' + t.montant + ' DH</p>' +
             '</div>' +
-            '<div>' +
-            '<button class="btn btn-sm btn-outline-light btn-modif" data-index="' + i + '"><i class="bi bi-pencil-square"></i></button> ' +
-            '<button class="btn btn-sm btn-outline-light btn-supp" data-index="' + i + '"><i class="bi bi-trash"></i></button>' +
+            '<div class="d-flex align-items-end">' +
+                '<button class="btn btn-sm btn-outline-light btn-modif me-2" id="' + i + '">' +
+                    '<i class="bi bi-pencil-square"></i>' +
+                '</button>' +
+                '<button class="btn btn-sm btn-outline-light btn-supp" id="' + i + '">' +
+                    '<i class="bi bi-trash"></i>' +
+                '</button>' +
             '</div>' +
-            '</div>' +
-            '</div>'; 
+        '</div>' +
+    '</div>';
+
             console.log(i);
         cards.appendChild(newcard);
 
@@ -78,7 +68,7 @@ function afficher() {
     localStorage.setItem('tab', JSON.stringify(tab));
 }
 
-     function ajouterTransaction() {
+     function  ajoutecrt() {
     let montant = Number(document.getElementById('montants').value);
     let type = document.getElementById('type').value;
     let desc = document.getElementById('desc').value;
@@ -88,13 +78,13 @@ function afficher() {
         return;
     }
    message.innerHTML= "";
-    let t = {
+    let frm = {
         type: type,
         desc: desc,
         montant: montant
     };
 
-    tab.push(t);
+    tab.push(frm);
     localStorage.setItem('tab', JSON.stringify(tab));
 
     document.getElementById('montants').value = ""
@@ -104,6 +94,30 @@ function afficher() {
     afficher();
 }
 
+function supprimercrd(id) {
+    tab.splice(id, 1);
+    localStorage.setItem('tab', JSON.stringify(tab));
+    afficher();
+}
+
+
+function modifiecrd(id) {
+    let t = tab[id];
+    formulaire.classList.remove('d-none');
+    document.getElementById('desc').value = t.desc;
+    document.getElementById('montants').value = t.montant;
+    document.getElementById('type').value = t.type;
+
+    ajouter.onclick = function () {
+        tab[id].desc = document.getElementById('desc').value;
+        tab[id].montant = Number(document.getElementById('montants').value);
+        tab[id].type = document.getElementById('type').value;
+        localStorage.setItem('tab', JSON.stringify(tab));
+        formulaire.classList.add('d-none');
+        afficher();
+        ajouter.onclick = ajoutecrd();
+    };
+}
 
 btnajouter.addEventListener('click', function () {
     formulaire.classList.remove('d-none');
@@ -113,15 +127,15 @@ btnclose.addEventListener('click', function () {
     formulaire.classList.add('d-none');
 });
 
-ajouter.addEventListener('click', ajouterTransaction);
+ajouter.addEventListener('click', ajoutecrt);
 
 cards.addEventListener('click', function (e) {
     if (e.target.closest('.btn-supp')) {
-        let index = e.target.closest('.btn-supp').getAttribute('data-index');
-        supprimerTransaction(index);
+        let id = e.target.closest('.btn-supp').getAttribute('id');
+        supprimercrd(id);
     } else if (e.target.closest('.btn-modif')) {
-        let index = e.target.closest('.btn-modif').getAttribute('data-index');
-        modifierTransaction(index);
+        let id = e.target.closest('.btn-modif').getAttribute('id');
+        modifiecrd(id);
     }
 });
 
