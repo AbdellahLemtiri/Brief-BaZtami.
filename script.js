@@ -138,12 +138,23 @@ ajouter.addEventListener('click', ajoutecrt);
 cards.addEventListener('click', function (e) {
     if (e.target.closest('.btnsupp')) {
         let id = e.target.closest('.btnsupp').getAttribute('id');
-       
-        supprimercrd(id);
+        let confirmation = document.getElementById('confirmation');
+        confirmation.classList.remove('d-none');
+
+        let ann = document.getElementById('ann');
+        let cnf = document.getElementById('cnf');
+        ann.onclick = function() {
+            confirmation.classList.add('d-none');
+        }
+        cnf.onclick = function() {
+            supprimercrd(id);
+            confirmation.classList.add('d-none'); 
+        }
     } else if (e.target.closest('.btnmodif')) {
         let id = e.target.closest('.btnmodif').getAttribute('id');
         modifiecrd(id);
     }
 });
+
 
 afficher();
